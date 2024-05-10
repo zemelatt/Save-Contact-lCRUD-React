@@ -2,11 +2,12 @@ import React from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
+import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 
-import Edit from "../EditContact/EditContact";
-import { allContatcs, deleteContact } from "../Axios/api";
-import { decrement } from "../Redux/Slice/Slice";
+import Edit from "../../editContact/EditContact";
+import { allContatcs, deleteContact } from "../../axios/api";
+import { decrement } from "../../redux/Slice/Slice";
 
 const AllContact = () => {
   const dispatch = useDispatch();
@@ -18,12 +19,8 @@ const AllContact = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        let response = await allContatcs();
-        setContacts(response.data);
-      } catch (error) {
-        console.log(`erorr: ${error.message}`);
-      }
+      let response = await allContatcs();
+      setContacts(response);
     };
     fetchData();
   }, [myValue]);
@@ -39,6 +36,7 @@ const AllContact = () => {
   function togglePop() {
     setPop(!pop);
   }
+  if (!contacts) return <div> </div>;
   return (
     <div>
       {pop ? <Edit toggle={togglePop} pid={edit} /> : null}

@@ -1,12 +1,11 @@
 import { useState } from "react";
 
-import "../css/style.css";
-import "../css/add.css";
+import "../../css/style.css";
+import "../../css/add.css";
 
-import NewContact from "../AddContact/NewContact";
-import AllContact from "../GetContact/AllContact";
-
-export function Home(props) {
+import NewContact from "../addContact/NewContact";
+import AllContact from "../getContact/AllContact";
+export function Home() {
   const [seen, setSeen] = useState(false);
 
   function togglePop() {

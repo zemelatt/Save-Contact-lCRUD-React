@@ -1,6 +1,7 @@
 import React from "react";
 
 const Pop = ({
+  getVal,
   close,
   Edit,
   name,
@@ -10,6 +11,7 @@ const Pop = ({
   setNumber,
   err,
 }) => {
+  console.log(name);
   return (
     <div>
       <form onSubmit={Edit}>
@@ -17,22 +19,24 @@ const Pop = ({
           Name: {name}
           <input
             type="text"
-            value={name}
+            name="name"
+            defaultValue={name}
             style={{ textTransform: "capitalize" }}
-            onChange={setName}
+            onChange={getVal}
             autoFocus
             required
-          />{" "}
+          />
           <p className="err"> {numerr}</p>
         </label>
         <label>
           Phone Number: {number}
           <input
+            name="number"
             type="tel"
-            value={number}
+            defaultValue={number}
             placeholder="+2519000000"
             // pattern="[0-9]{10}"
-            onChange={setNumber}
+            onChange={getVal}
             required
           />
           <p className="err">{err}</p>
