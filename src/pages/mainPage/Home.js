@@ -5,10 +5,11 @@ import "../../css/add.css";
 
 import NewContact from "../addContact/NewContact";
 import AllContact from "../getContact/AllContact";
-export function Home() {
+export function MainPage() {
   const [seen, setSeen] = useState(false);
 
   function togglePop() {
+    console.log("here");
     setSeen(!seen);
   }
   return (

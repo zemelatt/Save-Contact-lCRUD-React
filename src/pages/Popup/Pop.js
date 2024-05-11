@@ -1,16 +1,4 @@
-import React from "react";
-
-const Pop = ({
-  getVal,
-  close,
-  Edit,
-  name,
-  setName,
-  numerr,
-  number,
-  setNumber,
-  err,
-}) => {
+const Pop = ({ getVal, Edit, name, numerr, number, err }) => {
   console.log(name);
   return (
     <div>
@@ -35,7 +23,7 @@ const Pop = ({
             type="tel"
             defaultValue={number}
             placeholder="+2519000000"
-            // pattern="[0-9]{10}"
+            pattern="[0-9]{10}"
             onChange={getVal}
             required
           />
@@ -44,7 +32,6 @@ const Pop = ({
         <button type="submit">UPDATE CONTACT</button>
       </form>
     </div>
-    // </div>
   );
 };
 

@@ -1,12 +1,12 @@
 import React from "react";
 import { ToastContainer } from "react-toastify";
-import { Home } from "./pages/home/Home";
+import { MainPage } from "./pages/mainPage/Home";
 
 function App() {
   return (
     <div className="App">
       <ToastContainer />
-      <Home />
+      <MainPage />
     </div>
   );
 }

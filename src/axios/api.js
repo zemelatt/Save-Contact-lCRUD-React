@@ -30,12 +30,8 @@ const toastStyle = {
   errNotFound: {
     position: "top-right",
     autoClose: 3000,
-    hideProgressBar: false,
     newestOnTop: false,
-    closeOnClick: true,
     rtl: false,
-    pauseOnFocusLoss: true,
-    draggable: true,
     pauseOnHover: true,
   },
   informativ: { position: "top-right", autoClose: 5000 },
@@ -44,23 +40,25 @@ const toastStyle = {
     autoClose: 3000,
   },
 };
+const toastMessages = {
+  networkError: "Temporarly server is down!",
+  NOT_FOUND: "The server cannot find the requested resource",
+  success: "Contact updated",
+  otherMsg: "Something went wrong, stay patient ",
+};
 const toastNote = (HttpStatusCodeVal) => {
   switch (HttpStatusCodeVal) {
     case "Network Error":
-      console.log();
-      toast.error("Temporarly server is down!", toastStyle.errServer);
+      toast.error(toastMessages.networkError, toastStyle.errServer);
       break;
     case HttpStatusCode.NOT_FOUND:
-      toast.error(
-        "The server cannot find the requested resource.",
-        toastStyle.errNotFound
-      );
+      toast.error(toastMessages.NOT_FOUND, toastStyle.errNotFound);
       break;
     case HttpStatusCode.CREATED:
-      toast.success("Contact updated", toastStyle.success);
+      toast.success(toastMessages.success, toastStyle.success);
       break;
     default:
-      toast.info("Something went wrong, stay patient ", toastStyle.informativ);
+      toast.info(toastMessages.otherMsg, toastStyle.informativ);
       break;
   }
 };
@@ -92,10 +90,10 @@ export async function allContatcs() {
 
 export async function newContact(data) {
   // console.log(data);
-  // const file = data.name !== undefined ? data : null;
-  // console.log(file);
+  const file = data.name !== undefined ? data : null;
+  console.log(file);
 
-  return await axios.post(``, data);
+  return await axios.post(``, file);
 }
 
 export async function editableContact(pid) {
@@ -105,8 +103,6 @@ export async function editableContact(pid) {
 }
 
 export async function editContact(formData) {
-  console.log("from");
-  console.log(formData);
   return await axios.put(
     `/up/${formData.pid}`,
     formData.name !== undefined ? formData : null

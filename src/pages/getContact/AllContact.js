@@ -7,9 +7,9 @@ import { useSelector, useDispatch } from "react-redux";
 
 import Edit from "../../editContact/EditContact";
 import { allContatcs, deleteContact } from "../../axios/api";
-import { decrement } from "../../redux/Slice/Slice";
+import { decrement } from "../../redux/Slice/slice";
 
-const AllContact = () => {
+export default function AllContact({ togglePop }) {
   const dispatch = useDispatch();
   const myValue = useSelector((state) => state.myValue.value);
 
@@ -80,6 +80,4 @@ const AllContact = () => {
       </div>
     </div>
   );
-};
-
-export default AllContact;
+}

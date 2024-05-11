@@ -3,21 +3,17 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { editContact, editableContact } from "../axios/api";
-import { decrement } from "../redux/Slice/Slice";
+import { decrement } from "../redux/Slice/slice";
 import Pop from "../pages/Popup/Pop";
 
-const Edit = ({ pid, toggle }) => {
+export default function Edit({ pid, toggle }) {
   const dispatch = useDispatch();
-
-  const [data, setData] = useState({
-    name: "",
-    number: "",
-  });
+  const [data, setData] = useState({ name: "", number: "" });
   const [err, setErr] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await editableContact(pid);
-
       setData({
         ...data,
         name: response?.ContactName,
@@ -27,29 +23,28 @@ const Edit = ({ pid, toggle }) => {
     };
     fetchData();
   }, [pid]);
+
   async function handlechange(e) {
     e.preventDefault();
     const { name, value } = e.target;
-    setData((prevState) => ({ ...prevState, [name]: value }));
+    setData((data) => ({ ...data, [name]: value }));
   }
+
   const handleEdit = async (e) => {
     e.preventDefault();
     const response = await editContact(data);
-    if (response?.status === 201) {
-      toggle();
-      dispatch(decrement());
-    }
+    if (response?.status === 201) toggle();
+    dispatch(decrement());
     setErr(response?.data);
   };
 
-  if (!data.name && !data.name) return <div> </div>;
+  if (!data.name && !data.number) return <div> </div>;
   return (
     <div>
       <div className="popup">
         <div className="popup-inner">
           <span className="popHead">
             <h2>EDIT CONTACT</h2>
-
             <button onClick={toggle} className="close">
               X
             </button>
@@ -65,6 +60,4 @@ const Edit = ({ pid, toggle }) => {
       </div>
     </div>
   );
-};
-
-export default Edit;
+}
