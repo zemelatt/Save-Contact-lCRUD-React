@@ -9,7 +9,6 @@ export function MainPage() {
   const [seen, setSeen] = useState(false);
 
   function togglePop() {
-    console.log("here");
     setSeen(!seen);
   }
   return (

@@ -12,7 +12,7 @@ const Pop = ({ getVal, Edit, name, numerr, number, err }) => {
             style={{ textTransform: "capitalize" }}
             onChange={getVal}
             autoFocus
-            required
+            // required
           />
           <p className="err"> {numerr}</p>
         </label>
@@ -23,9 +23,9 @@ const Pop = ({ getVal, Edit, name, numerr, number, err }) => {
             type="tel"
             defaultValue={number}
             placeholder="+2519000000"
-            pattern="[0-9]{10}"
+            // pattern="[0-9]{10}"
             onChange={getVal}
-            required
+            // required
           />
           <p className="err">{err}</p>
         </label>
