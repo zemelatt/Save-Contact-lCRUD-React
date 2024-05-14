@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";
 
-import Edit from "../../editContact/EditContact";
+import Edit from "../editContact/EditContact";
 import { allContatcs, deleteContact } from "../../axios/api";
 import { decrement } from "../../redux/Slice/slice";
 

@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 
 import { newContact } from "../../axios/api";
 import { decrement } from "../../redux/Slice/slice";
-import Pop from "../Popup/Pop";
+import Pop from "../../component/Popup/Pop";
 
 export default function NewContact({ toggle }) {
   const dispatch = useDispatch();

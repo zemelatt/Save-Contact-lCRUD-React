@@ -2,9 +2,9 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { editContact, editableContact } from "../axios/api";
-import { decrement } from "../redux/Slice/slice";
-import Pop from "../pages/Popup/Pop";
+import { editContact, editableContact } from "../../axios/api";
+import { decrement } from "../../redux/Slice/slice";
+import Pop from "../../component/Popup/Pop";
 
 export default function Edit({ pid, toggle }) {
   const dispatch = useDispatch();
