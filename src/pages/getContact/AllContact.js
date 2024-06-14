@@ -9,7 +9,7 @@ import Edit from "../editContact/EditContact";
 import { allContatcs, deleteContact } from "../../axios/api";
 import { decrement } from "../../redux/Slice/slice";
 
-export default function AllContact({ togglePop }) {
+export default function AllContact() {
   const dispatch = useDispatch();
   const myValue = useSelector((state) => state.myValue.value);
 

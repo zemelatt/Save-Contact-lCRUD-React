@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { editContact, editableContact } from "../../axios/api";
 import { decrement } from "../../redux/Slice/slice";
-import Pop from "../../component/Popup/Pop";
+import Pop from "../../component/popup/Pop";
 
 export default function Edit({ pid, toggle }) {
   const dispatch = useDispatch();
