@@ -1,44 +1,51 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { editContact, editableContact } from "../../axios/api";
-import { decrement } from "../../redux/Slice/slice";
+import { setMyValue } from "../../redux/Slice/slice";
 import Pop from "../../component/popup/Pop";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Edit({ pid, toggle }) {
   const dispatch = useDispatch();
-  const [data, setData] = useState({ name: "", number: "" });
+  const [datas, setData] = useState({ name: "", number: "" });
   const [err, setErr] = useState("");
 
-  useEffect(() => {
-    const fetchData = async () => {
+  useQuery({
+    queryKey: ["oneContact"],
+    queryFn: async () => {
       const response = await editableContact(pid);
       setData({
-        ...data,
+        ...datas,
         name: response?.ContactName,
         number: response?.ContactNumber,
         pid: response?.pid,
       });
-    };
-    fetchData();
-  }, [pid]);
+      return response;
+    },
+  });
 
   async function handlechange(e) {
     e.preventDefault();
     const { name, value } = e.target;
-    setData((data) => ({ ...data, [name]: value }));
+    setData((datas) => ({ ...datas, [name]: value }));
   }
 
   const handleEdit = async (e) => {
     e.preventDefault();
-    const response = await editContact(data);
-    if (response?.status === 201) toggle();
-    dispatch(decrement());
+    datas.pid = pid;
+
+    const response = await editContact(datas);
+    if (response?.status === 201) {
+      toggle();
+      dispatch(setMyValue());
+      return;
+    }
     setErr(response?.data);
   };
 
-  if (!data.name && !data.number) return <div> </div>;
+  if (!datas.name && !datas.number) return <div> </div>;
   return (
     <div>
       <div className="popup">
@@ -51,8 +58,8 @@ export default function Edit({ pid, toggle }) {
           </span>
           <Pop
             Edit={handleEdit}
-            name={data.name}
-            number={data.number}
+            name={datas.name}
+            number={datas.number}
             getVal={handlechange}
             err={err}
           />

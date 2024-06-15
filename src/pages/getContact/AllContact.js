@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Edit from "../editContact/EditContact";
 import { allContatcs, deleteContact } from "../../axios/api";
 import { decrement } from "../../redux/Slice/slice";
+import { useQuery } from "@tanstack/react-query";
 
 export default function AllContact() {
   const dispatch = useDispatch();
@@ -15,15 +16,21 @@ export default function AllContact() {
 
   const [contacts, setContacts] = useState([]);
   const [edit, setEdit] = useState();
+
   const [pop, setPop] = useState();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      let response = await allContatcs();
+  const { refetch } = useQuery({
+    queryKey: ["allContact"],
+    queryFn: async () => {
+      const response = await allContatcs();
       setContacts(response);
-    };
-    fetchData();
-  }, [myValue]);
+      return response;
+    },
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [myValue, refetch]);
 
   const handleDelete = async (pid) => {
     deleteContact(pid);
@@ -60,13 +67,13 @@ export default function AllContact() {
                   <td>
                     <FaTrash
                       className="icons delete"
-                      onClick={() => handleDelete(val.pid)}
+                      onClick={() => handleDelete(val.id)}
                     />
                   </td>
                   <td>
                     <FaEdit
                       className="icons edit"
-                      onClick={() => handleEdit(val.pid)}
+                      onClick={() => handleEdit(val.id)}
                     />
                   </td>
                   <td></td>

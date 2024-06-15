@@ -1,31 +1,29 @@
-const Pop = ({ getVal, Edit, name, numerr, number, err }) => {
-  console.log(name);
+import React from "react";
+
+const Pop = ({ getVal, Edit, name, number, err }) => {
   return (
     <div>
       <form onSubmit={Edit}>
         <label>
-          Name: {name}
+          Name:
           <input
             type="text"
             name="name"
-            defaultValue={name}
+            defaultValue={name} // Use defaultValue for initial value
             style={{ textTransform: "capitalize" }}
             onChange={getVal}
             autoFocus
-            // required
           />
-          <p className="err"> {numerr}</p>
+          <p className="err">{err}</p>
         </label>
         <label>
-          Phone Number: {number}
+          Phone Number:
           <input
             name="number"
             type="tel"
-            defaultValue={number}
+            defaultValue={number} // Use defaultValue for initial value
             placeholder="+2519000000"
-            // pattern="[0-9]{10}"
             onChange={getVal}
-            // required
           />
           <p className="err">{err}</p>
         </label>

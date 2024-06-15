@@ -1,7 +1,6 @@
 import axios from "axios";
 import { toastNote } from "./toastAsset";
 import { HttpStatusCode } from "./toastAsset";
-console.log(HttpStatusCode);
 
 axios.defaults.baseURL = "http://localhost:2222/api/phonebook";
 axios.interceptors.request.use(
@@ -51,7 +50,8 @@ export async function newContact(data) {
 export async function editableContact(pid) {
   const id = pid;
   const response = await axios.get(`/${id}`);
-  return response?.data[0];
+
+  return response?.data;
 }
 
 export async function editContact(formData) {
