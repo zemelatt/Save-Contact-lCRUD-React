@@ -14,7 +14,6 @@ const Pop = ({ getVal, Edit, name, number, err }) => {
             onChange={getVal}
             autoFocus
           />
-          <p className="err">{err}</p>
         </label>
         <label>
           Phone Number:
