@@ -11,8 +11,8 @@ Technologies Used
   + Hooks (useState, useEffect, useContext, custom hooks)
 - React Query
 - Redux
+  
 Description
-Provide a short summary of how each technology is used in your project.
 
 - React: Used as the primary frontend library.
 - Hooks: Leveraged useState, useEffect, useContext extensively for managing state and context.
