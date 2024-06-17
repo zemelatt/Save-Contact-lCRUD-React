@@ -21,7 +21,9 @@ Provide a short summary of how each technology is used in your project.
 
 		
 Installation
-download the zip file from ripo, then by extracting the file run "npm i" and "npm start ",
+
+download the zip file from ripo, 
+then by extracting the file run "npm i" and "npm start ",
 respectively.
 
 
