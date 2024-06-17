@@ -2,7 +2,7 @@ Contact list app
 
 Overview
 
- Brief description of your project.
+ i build this project to give glipse of my react skill,
 
 Technologies Used
 - React
