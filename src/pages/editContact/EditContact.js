@@ -1,20 +1,19 @@
 import React, { useContext } from "react";
-
-import { useCustomHook } from "customHook/useEditContactHook";
-
-export default function Edit({ pid, toggle }) {
+import { useCustomHook } from "hooks/useEditContactHook";
+import { ContextTest } from "hooks/contextHook";
+export default function Edit({ toggle }) {
+  const pid = useContext(ContextTest);
   const { data, err, handleEdit, handlechange, Pop } = useCustomHook({
     pid,
     toggle,
   });
-  const value = useContext();
-  console.log(value);
+
   return (
     <div>
       <div className="popup">
         <div className="popup-inner">
           <span className="popHead">
-            <h2>EDIT CONTACT</h2>
+            <h2>Edit Contact</h2>
             <button onClick={toggle} className="close">
               X
             </button>
