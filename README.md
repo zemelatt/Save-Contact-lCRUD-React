@@ -2,7 +2,11 @@ Contact list app
 
 Overview
 
- i build this project to give glipse of my react skill,
+I built this project to showcase my React skills. 
+It's a simple CRUD application that allows users to create, update, delete, and edit items. 
+The app utilizes props, useContext hook for managing global state, and Redux for efficient data sharing between parent and child components.
+
+
 
 Technologies Used
 - React
