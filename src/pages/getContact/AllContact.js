@@ -2,11 +2,12 @@ import React from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
 import Edit from "../editContact/EditContact";
-import { useAllContactHook } from "../../customHook/useAllContactHook";
+import { useAllContactHook } from "customHook/useAllContactHook";
 
 export default function AllContact() {
   const { togglePop, handleEdit, handleDelete, contacts, edit, pop } =
     useAllContactHook();
+
   return (
     <div>
       {pop ? <Edit toggle={togglePop} pid={edit} /> : null}

@@ -1,6 +1,4 @@
-import React from "react";
-
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from "react-redux";

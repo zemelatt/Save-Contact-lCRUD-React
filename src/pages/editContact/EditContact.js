@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 
-import { useCustomHook } from "../../customHook/useEditContactHook";
+import { useCustomHook } from "customHook/useEditContactHook";
 
 export default function Edit({ pid, toggle }) {
   const { data, err, handleEdit, handlechange, Pop } = useCustomHook({
     pid,
     toggle,
   });
-
+  const value = useContext();
+  console.log(value);
   return (
     <div>
       <div className="popup">
