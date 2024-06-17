@@ -16,7 +16,7 @@ export const useAllContactHook = () => {
 
   const [pop, setPop] = useState();
 
-  const { refetch } = useQuery({
+  const { refetch, isLoading } = useQuery({
     queryKey: ["allContact"],
     queryFn: async () => {
       const response = await allContatcs();
@@ -40,7 +40,9 @@ export const useAllContactHook = () => {
   function togglePop() {
     setPop(!pop);
   }
+  if (isLoading) return <div>Loading</div>;
   if (!contacts) return <div> </div>;
+
   return {
     togglePop,
     handleEdit,

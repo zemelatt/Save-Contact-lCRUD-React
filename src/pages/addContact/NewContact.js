@@ -28,7 +28,7 @@ export default function NewContact({ toggle }) {
     <div className="popup">
       <div className="popup-inner">
         <span className="popHead">
-          <h2>ADD CONTACT</h2>
+          <h2>Add Contact</h2>
 
           <button onClick={toggle} className="close">
             X
