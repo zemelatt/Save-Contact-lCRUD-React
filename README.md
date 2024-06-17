@@ -19,21 +19,18 @@ Provide a short summary of how each technology is used in your project.
 
 		
 Installation
-Steps to install and run the project locally.
+download the zip file from ripo, then by extracting the file run "npm i" and "npm start ",
+respectively.
 
-
-Usage
-Instructions on how to use the app or any additional setup needed.
 
 
 Credits
-Give credit where it's due, such as mentioning libraries, resources, or tutorials that were particularly helpful.
+i wanne give creadit to ....
 
 
-License
-Include licensing information if applicable.
+
 
 
 Contributing
-Guidelines for contributing to the project if you're open to contributions.
+Guidelines for MEREB
 
