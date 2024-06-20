@@ -1,14 +1,32 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { newContact } from "../../axios/api";
-import { decrement } from "../../redux/Slice/slice";
+
 import Pop from "../../component/popup/Pop";
 
 export default function NewContact({ toggle }) {
-  const dispatch = useDispatch();
   const [err, setErr] = useState("");
   const [data, setData] = useState({ name: "", number: "" });
+  const client = useQueryClient();
+
+  const mutationKey = "addContact";
+  const { mutate } = useMutation({
+    mutationKey,
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ["allContact"] });
+      toggle();
+    },
+    mutationFn: async (data) => {
+      let response = await newContact(data);
+
+      if (response.status === 200) {
+        setErr(response?.data);
+        return;
+      }
+      return response.status;
+    },
+  });
 
   async function handlechange(e) {
     e.preventDefault();
@@ -18,12 +36,8 @@ export default function NewContact({ toggle }) {
 
   async function handleAddcontact(e) {
     e.preventDefault();
-    let response = await newContact(data);
-    if (response?.status === 201) toggle();
-    dispatch(decrement());
-    setErr(response?.data);
+    mutate(data);
   }
-
   return (
     <div className="popup">
       <div className="popup-inner">
@@ -36,8 +50,8 @@ export default function NewContact({ toggle }) {
         </span>
         <Pop
           Edit={handleAddcontact}
-          name={data.name}
-          number={data.number}
+          name={data?.name}
+          number={data?.number}
           getVal={handlechange}
           err={err}
         />

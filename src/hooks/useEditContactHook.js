@@ -2,18 +2,21 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { editContact, editableContact } from "../axios/api";
-import { setMyValue } from "../redux/Slice/slice";
 import Pop from "../component/popup/Pop";
+import { editableContact } from "../axios/api";
+
 import { useQuery } from "@tanstack/react-query";
+import { useEditContactMutation } from "./query";
 
 export const useCustomHook = ({ pid, toggle }) => {
+  const { mutate } = useEditContactMutation();
+
   const dispatch = useDispatch();
   const [data, setData] = useState({ name: "", number: "" });
   const [err, setErr] = useState("");
 
   useQuery({
-    queryKey: ["oneContact"],
+    queryKey: ["oneContact", pid],
     queryFn: async () => {
       const response = await editableContact(pid);
 
@@ -23,8 +26,11 @@ export const useCustomHook = ({ pid, toggle }) => {
         number: response?.ContactNumber,
         pid: response?.pid,
       });
-      return response;
+
+      return data;
     },
+    enabled: !!pid,
+    retry: 3,
   });
 
   async function handlechange(e) {
@@ -32,17 +38,12 @@ export const useCustomHook = ({ pid, toggle }) => {
     const { name, value } = e.target;
     setData((data) => ({ ...data, [name]: value }));
   }
+
   async function handleEdit(e) {
     e.preventDefault();
     data.pid = pid;
-
-    const response = await editContact(data);
-    if (response?.status === 201) {
-      toggle();
-      dispatch(setMyValue());
-      return;
-    }
-    setErr(response?.data);
+    mutate(data);
+    toggle();
   }
   if (!data) {
     return <div></div>;
@@ -54,7 +55,6 @@ export const useCustomHook = ({ pid, toggle }) => {
     handleEdit,
     handlechange,
     Pop,
-
     dispatch,
   };
 };

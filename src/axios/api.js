@@ -43,7 +43,7 @@ export async function allContatcs() {
 }
 
 export async function newContact(data) {
-  const file = data.name !== undefined ? data : null;
+  const file = data?.name !== undefined ? data : null;
   return await axios.post(``, file);
 }
 

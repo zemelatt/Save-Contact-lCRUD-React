@@ -1,37 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import "react-toastify/dist/ReactToastify.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { allContatcs, deleteContact } from "../axios/api";
-import { decrement } from "../redux/Slice/slice";
-import { useQuery } from "@tanstack/react-query";
-
+import { useContact, useDeleteContactMutation } from "./query";
 export const useAllContactHook = () => {
-  const dispatch = useDispatch();
   const myValue = useSelector((state) => state.myValue.value);
+  const { mutate } = useDeleteContactMutation();
 
-  const [contacts, setContacts] = useState([]);
   const [edit, setEdit] = useState();
-
   const [pop, setPop] = useState();
 
-  const { refetch, isLoading } = useQuery({
-    queryKey: ["allContact"],
-    queryFn: async () => {
-      const response = await allContatcs();
-      setContacts(response);
-      return response;
-    },
-  });
-
-  useEffect(() => {
-    refetch();
-  }, [myValue, refetch]);
+  const { isLoading, data: contacts } = useContact();
 
   const handleDelete = async (pid) => {
-    deleteContact(pid);
-    dispatch(decrement());
+    mutate(pid);
   };
   const handleEdit = (pid) => {
     setEdit(pid);
