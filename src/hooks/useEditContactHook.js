@@ -19,14 +19,12 @@ export const useCustomHook = ({ pid, toggle }) => {
     queryKey: ["oneContact", pid],
     queryFn: async () => {
       const response = await editableContact(pid);
-
       setData({
         ...data,
         name: response?.ContactName,
         number: response?.ContactNumber,
         pid: response?.pid,
       });
-
       return data;
     },
     enabled: !!pid,

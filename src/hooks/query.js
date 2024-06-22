@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { allContatcs, deleteContact, editContact } from "../axios/api";
 
-export const useContact = () => {
+const useContact = () => {
   return useQuery({
     queryKey: ["allContact"],
     queryFn: async () => {
@@ -12,7 +12,7 @@ export const useContact = () => {
   });
 };
 
-export const useDeleteContactMutation = () => {
+const useDeleteContactMutation = () => {
   const client = useQueryClient();
   const mutationKey = "deleteContact";
   const { mutate, onSuccess } = useMutation({
@@ -32,7 +32,7 @@ export const useDeleteContactMutation = () => {
   };
 };
 
-export const useEditContactMutation = () => {
+const useEditContactMutation = () => {
   const client = useQueryClient();
   const mutationKey = "editContact";
   const { mutate, onSuccess } = useMutation({
@@ -50,3 +50,4 @@ export const useEditContactMutation = () => {
     onSuccess,
   };
 };
+export { useEditContactMutation, useDeleteContactMutation, useContact };

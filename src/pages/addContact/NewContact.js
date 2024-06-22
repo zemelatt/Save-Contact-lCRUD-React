@@ -15,7 +15,6 @@ export default function NewContact({ toggle }) {
     mutationKey,
     onSuccess: () => {
       client.invalidateQueries({ queryKey: ["allContact"] });
-      toggle();
     },
     mutationFn: async (data) => {
       let response = await newContact(data);
@@ -24,6 +23,7 @@ export default function NewContact({ toggle }) {
         setErr(response?.data);
         return;
       }
+      toggle();
       return response.status;
     },
   });
@@ -43,7 +43,6 @@ export default function NewContact({ toggle }) {
       <div className="popup-inner">
         <span className="popHead">
           <h2>Add Contact</h2>
-
           <button onClick={toggle} className="close">
             X
           </button>
