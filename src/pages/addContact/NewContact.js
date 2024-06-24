@@ -1,32 +1,11 @@
 import { useState } from "react";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { newContact } from "../../axios/api";
-
 import Pop from "../../component/popup/Pop";
+import { useNewContactMutation } from "hooks/query";
 
 export default function NewContact({ toggle }) {
-  const [err, setErr] = useState("");
   const [data, setData] = useState({ name: "", number: "" });
-  const client = useQueryClient();
-
-  const mutationKey = "addContact";
-  const { mutate } = useMutation({
-    mutationKey,
-    onSuccess: () => {
-      client.invalidateQueries({ queryKey: ["allContact"] });
-    },
-    mutationFn: async (data) => {
-      let response = await newContact(data);
-
-      if (response.status === 200) {
-        setErr(response?.data);
-        return;
-      }
-      toggle();
-      return response.status;
-    },
-  });
+  const { mutate, err } = useNewContactMutation(toggle);
 
   async function handlechange(e) {
     e.preventDefault();
@@ -34,7 +13,7 @@ export default function NewContact({ toggle }) {
     setData((prevState) => ({ ...prevState, [name]: value }));
   }
 
-  async function handleAddcontact(e) {
+  function handleAddcontact(e) {
     e.preventDefault();
     mutate(data);
   }
